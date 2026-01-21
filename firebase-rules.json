@@ -1,0 +1,6 @@
+{
+ "rules":{
+  "content":{".read":true,".write":"auth!=null"},
+  "feedback":{".read":"auth!=null",".write":true}
+ }
+}
