@@ -12,12 +12,12 @@
         .page { display: none; animation: slideUp 0.7s cubic-bezier(0.19, 1, 0.22, 1); }
         .active { display: block; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        
+
         /* Professional Video Theme Colors */
         .premium-dark { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
         .gold-glow { color: #f59e0b; text-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
         .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.3); }
-        
+
         /* Avatar & Buttons */
         .profile-wrapper { padding: 6px; background: linear-gradient(45deg, #f59e0b, #fbbf24, #f59e0b); border-radius: 50%; box-shadow: 0 15px 35px rgba(245, 158, 11, 0.3); }
         .action-btn { background: linear-gradient(to right, #f59e0b, #d97706); transition: 0.4s; box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2); }
@@ -26,251 +26,444 @@
         .gallery-card { border-radius: 24px; overflow: hidden; height: 350px; border: 5px solid white; box-shadow: 0 12px 25px rgba(0,0,0,0.08); transition: 0.5s; }
         .gallery-card:hover { transform: scale(1.03); }
         .gallery-card img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Feedback select option */
+        select option { color: #0f172a; font-weight: 700; }
     </style>
 </head>
 <body>
 
-    <nav class="premium-dark text-white sticky top-0 z-50 shadow-2xl">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex flex-col">
-                <span class="font-extrabold text-2xl tracking-tight">मुखिया <span class="gold-glow">पंचायत</span></span>
-                <span class="text-[10px] uppercase tracking-[4px] text-amber-500/80 font-bold">रोह चुनाव 2026</span>
-            </div>
-            <div class="hidden md:flex space-x-10 items-center font-bold text-sm uppercase tracking-widest">
-                <button onclick="showPage('home')" class="hover:text-amber-400 transition">होम</button>
-                <button onclick="showPage('manifesto')" class="hover:text-amber-400 transition">घोषणा पत्र</button>
-                <button onclick="showPage('login')" class="action-btn px-6 py-2.5 rounded-full text-slate-900 font-black shadow-lg">एडमिन</button>
-            </div>
+<nav class="premium-dark text-white sticky top-0 z-50 shadow-2xl">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="flex flex-col">
+            <span class="font-extrabold text-2xl tracking-tight">मुखिया <span class="gold-glow">पंचायत</span></span>
+            <span class="text-[10px] uppercase tracking-[4px] text-amber-500/80 font-bold">रोह चुनाव 2026</span>
         </div>
-    </nav>
+        <div class="hidden md:flex space-x-10 items-center font-bold text-sm uppercase tracking-widest">
+            <button onclick="showPage('home')" class="hover:text-amber-400 transition">होम</button>
+            <button onclick="showPage('manifesto')" class="hover:text-amber-400 transition">घोषणा पत्र</button>
+            <button onclick="showPage('login')" class="action-btn px-6 py-2.5 rounded-full text-slate-900 font-black shadow-lg">एडमिन</button>
+        </div>
+    </div>
+</nav>
 
-    <div class="bg-amber-500 text-slate-900 text-center py-1.5 text-xs font-black tracking-widest" id="liveClock"></div>
+<div class="bg-amber-500 text-slate-900 text-center py-1.5 text-xs font-black tracking-widest" id="liveClock"></div>
 
-    <section id="home" class="page active">
-        <header class="premium-dark pt-20 pb-36 text-center text-white relative">
-            <div class="container mx-auto px-4 relative z-10">
-                <div class="w-60 h-60 mx-auto mb-10 profile-wrapper">
-                    <div class="w-full h-full rounded-full overflow-hidden bg-slate-800 flex items-center justify-center">
-                        <img id="profilePic" src="" class="w-full h-full object-cover hidden">
-                        <i id="defaultIcon" class="fa fa-user-tie text-7xl text-amber-500"></i>
-                    </div>
-                </div>
-                <h1 class="text-6xl md:text-8xl font-black mb-4 tracking-tighter">विपेन्द्र प्रसाद सिन्हा</h1>
-                <h2 class="text-3xl md:text-4xl font-bold gold-glow italic mb-10">उर्फ (दिपु मेहता)</h2>
-                <div class="flex justify-center gap-4">
-                    <span class="bg-white/10 border border-white/20 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest">ईमानदार</span>
-                    <span class="bg-white/10 border border-white/20 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest">कर्मठ</span>
-                    <span class="bg-white/10 border border-white/20 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest">शिक्षित</span>
+<section id="home" class="page active">
+    <header class="premium-dark pt-20 pb-36 text-center text-white relative">
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="w-60 h-60 mx-auto mb-10 profile-wrapper">
+                <div class="w-full h-full rounded-full overflow-hidden bg-slate-800 flex items-center justify-center">
+                    <img id="profilePic" src="" class="w-full h-full object-cover hidden">
+                    <i id="defaultIcon" class="fa fa-user-tie text-7xl text-amber-500"></i>
                 </div>
             </div>
-        </header>
-
-        <div class="container mx-auto px-4 -mt-24 relative z-20">
-            <div class="glass-panel rounded-[3rem] p-12 md:p-20 shadow-2xl border-t-8 border-amber-500 text-center">
-                <i class="fa fa-quote-left text-5xl text-amber-500/20 mb-8 block mx-auto"></i>
-                <p id="mainShayari" class="text-3xl md:text-5xl font-extrabold text-slate-800 leading-tight italic">...</p>
+            <h1 class="text-6xl md:text-8xl font-black mb-4 tracking-tighter">विपेन्द्र प्रसाद सिन्हा</h1>
+            <h2 class="text-3xl md:text-4xl font-bold gold-glow italic mb-10">उर्फ (दिपु मेहता)</h2>
+            <div class="flex justify-center gap-4">
+                <span class="bg-white/10 border border-white/20 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest">ईमानदार</span>
+                <span class="bg-white/10 border border-white/20 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest">कर्मठ</span>
+                <span class="bg-white/10 border border-white/20 px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest">शिक्षित</span>
             </div>
         </div>
+    </header>
 
-        <main class="container mx-auto px-4 py-24 grid md:grid-cols-2 gap-12">
-            <div class="bg-white p-12 rounded-[2.5rem] shadow-xl border-l-8 border-amber-500">
-                <h3 class="text-3xl font-black text-slate-900 mb-6 flex items-center gap-4">
-                    <i class="fa fa-bullhorn text-amber-600"></i> आगामी कार्यक्रम
-                </h3>
-                <div id="mainEvent" class="text-2xl text-slate-500 font-bold italic leading-relaxed">लोड हो रहा है...</div>
-            </div>
+    <div class="container mx-auto px-4 -mt-24 relative z-20">
+        <div class="glass-panel rounded-[3rem] p-12 md:p-20 shadow-2xl border-t-8 border-amber-500 text-center">
+            <i class="fa fa-quote-left text-5xl text-amber-500/20 mb-8 block mx-auto"></i>
+            <p id="mainShayari" class="text-3xl md:text-5xl font-extrabold text-slate-800 leading-tight italic">...</p>
+        </div>
+    </div>
 
-            <div class="premium-dark p-12 rounded-[2.5rem] shadow-2xl text-white border-b-8 border-amber-500">
-                <h3 class="text-2xl font-black mb-2 opacity-70 uppercase tracking-widest">संपर्क सूत्र</h3>
-                <p class="text-5xl font-black gold-glow mb-10 tracking-tighter">+91 7488417922</p>
-                <a href="https://wa.me/917488417922" class="flex items-center justify-center gap-4 bg-green-600 hover:bg-green-700 text-white py-6 rounded-3xl font-black text-2xl transition shadow-xl">
-                    <i class="fab fa-whatsapp text-4xl"></i> व्हाट्सएप से जुड़ें
-                </a>
-            </div>
-        </main>
+    <main class="container mx-auto px-4 py-24 grid md:grid-cols-2 gap-12">
+        <div class="bg-white p-12 rounded-[2.5rem] shadow-xl border-l-8 border-amber-500">
+            <h3 class="text-3xl font-black text-slate-900 mb-6 flex items-center gap-4">
+                <i class="fa fa-bullhorn text-amber-600"></i> आगामी कार्यक्रम
+            </h3>
+            <div id="mainEvent" class="text-2xl text-slate-500 font-bold italic leading-relaxed">लोड हो रहा है...</div>
+        </div>
 
-        <section class="container mx-auto px-4 py-16">
-            <h3 class="text-5xl font-black text-slate-900 mb-16 border-l-8 border-amber-500 pl-6 uppercase tracking-tighter">पंचायत <span class="gold-glow">गैलरी</span></h3>
-            <div id="photoGallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"></div>
-        </section>
+        <div class="premium-dark p-12 rounded-[2.5rem] shadow-2xl text-white border-b-8 border-amber-500">
+            <h3 class="text-2xl font-black mb-2 opacity-70 uppercase tracking-widest">संपर्क सूत्र</h3>
+            <p class="text-5xl font-black gold-glow mb-10 tracking-tighter">+91 7488417922</p>
+            <a href="https://wa.me/917488417922" class="flex items-center justify-center gap-4 bg-green-600 hover:bg-green-700 text-white py-6 rounded-3xl font-black text-2xl transition shadow-xl">
+                <i class="fab fa-whatsapp text-4xl"></i> व्हाट्सएप से जुड़ें
+            </a>
+        </div>
+    </main>
+
+    <section class="container mx-auto px-4 py-16">
+        <h3 class="text-5xl font-black text-slate-900 mb-16 border-l-8 border-amber-500 pl-6 uppercase tracking-tighter">
+            पंचायत <span class="gold-glow">गैलरी</span>
+        </h3>
+        <div id="photoGallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12"></div>
     </section>
 
-    <section id="manifesto" class="page container mx-auto px-4 py-20">
-        <div class="max-w-5xl mx-auto glass-panel rounded-[3rem] shadow-2xl overflow-hidden">
-            <div class="premium-dark p-20 text-center text-white">
-                <h2 class="text-6xl font-black mb-4">हमारा संकल्प</h2>
-                <p class="text-amber-500 font-bold tracking-[5px] uppercase">सशक्त रोह - समृद्ध रोह</p>
+    <!-- ✅ Feedback Section ADDED -->
+    <section class="container mx-auto px-4 py-24">
+        <div class="glass-panel rounded-[3rem] shadow-2xl overflow-hidden border-t-8 border-amber-500">
+            <div class="premium-dark p-16 text-center text-white">
+                <h3 class="text-5xl font-black mb-6">फीडबैक / सुझाव</h3>
+                <p class="text-amber-400 font-bold tracking-[3px] uppercase text-sm">
+                    अपने सुझाव और विचार हमारे साथ साझा करें। आपकी राय हमारे लिए महत्वपूर्ण है।
+                </p>
             </div>
-            <div class="p-16 space-y-12">
-                <div class="flex items-start gap-10 p-8 hover:bg-slate-50 rounded-3xl transition">
-                    <span class="text-7xl font-black text-amber-500/10">01</span>
-                    <p class="text-3xl font-bold text-slate-700 leading-tight">पंचायत के सर्वांगीण विकास के लिए पारदर्शिता के साथ काम करना।</p>
-                </div>
-                <div class="flex items-start gap-10 p-8 border-y border-slate-100 hover:bg-slate-50 rounded-3xl transition">
-                    <span class="text-7xl font-black text-amber-500/10">02</span>
-                    <p class="text-3xl font-bold text-slate-700 leading-tight">शिक्षा, स्वास्थ्य और कृषि सुविधाओं को आधुनिक बनाना।</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section id="login" class="page container mx-auto px-4 py-20">
-        <div id="loginForm" class="max-w-md mx-auto glass-panel p-12 rounded-[3rem] shadow-2xl border-t-8 border-slate-900 text-center">
-            <h2 class="text-4xl font-black mb-10">एडमिन लॉगिन</h2>
-            <div class="space-y-6">
-                <input type="text" id="userInput" placeholder="यूजरनेम" class="w-full bg-slate-50 border-2 p-6 rounded-2xl outline-none focus:border-amber-500 transition font-bold">
-                <input type="password" id="passInput" placeholder="पासवर्ड" class="w-full bg-slate-50 border-2 p-6 rounded-2xl outline-none focus:border-amber-500 transition font-bold">
-                <button onclick="handleLogin()" class="w-full premium-dark text-white py-6 rounded-2xl font-black text-xl shadow-xl">लॉगिन करें</button>
-            </div>
-        </div>
+            <div class="p-12 md:p-16">
+                <div class="grid md:grid-cols-2 gap-10">
 
-        <div id="adminDashboard" class="hidden max-w-6xl mx-auto glass-panel p-12 rounded-[3.5rem] shadow-2xl border-4 border-amber-500">
-            <div class="flex justify-between items-center mb-16 pb-8 border-b-2">
-                <h2 class="text-4xl font-black text-slate-900">मास्टर कंट्रोल</h2>
-                <button onclick="location.reload()" class="bg-red-500 text-white px-10 py-3 rounded-2xl font-black shadow-lg">लॉगआउट</button>
-            </div>
-            
-            <div class="grid lg:grid-cols-2 gap-12">
-                <div class="space-y-8">
-                    <div>
-                        <label class="block font-black text-slate-700 mb-3 text-lg">मुख्य संदेश (शायरी):</label>
-                        <textarea id="editShayari" class="w-full bg-slate-50 border-2 p-6 rounded-3xl h-40 outline-none focus:border-amber-500 font-bold"></textarea>
-                    </div>
-                    <div>
-                        <label class="block font-black text-slate-700 mb-3 text-lg">आगामी कार्यक्रम:</label>
-                        <input type="text" id="editEvent" class="w-full bg-slate-50 border-2 p-5 rounded-2xl outline-none font-bold">
-                    </div>
-                    <div>
-                        <label class="block font-black text-slate-700 mb-3 text-lg">सोशल लिंक्स (FB/IG/YT):</label>
-                        <div class="space-y-3">
-                            <input type="text" id="fbLink" placeholder="Facebook" class="w-full p-4 border rounded-xl">
-                            <input type="text" id="igLink" placeholder="Instagram" class="w-full p-4 border rounded-xl">
-                            <input type="text" id="ytLink" placeholder="YouTube" class="w-full p-4 border rounded-xl">
+                    <div class="bg-slate-50 p-10 rounded-[2.5rem] border border-slate-100">
+                        <h4 class="text-3xl font-black text-slate-900 mb-4">
+                            <i class="fa fa-message text-amber-600 mr-2"></i>अभी फीडबैक दें
+                        </h4>
+                        <p class="text-slate-600 font-bold text-lg leading-relaxed">
+                            आप अपने गांव/पंचायत से संबंधित कोई समस्या, सुझाव या समर्थन संदेश भेज सकते हैं।
+                            आपका फीडबैक सीधे टीम तक पहुँचेगा।
+                        </p>
+
+                        <div class="mt-8 space-y-4">
+                            <div class="flex items-center gap-4 text-slate-700 font-bold">
+                                <i class="fa fa-shield-halved text-amber-600"></i>
+                                <span>आपकी जानकारी सुरक्षित रहेगी</span>
+                            </div>
+                            <div class="flex items-center gap-4 text-slate-700 font-bold">
+                                <i class="fa fa-bolt text-amber-600"></i>
+                                <span>फीडबैक तुरंत सेव होगा</span>
+                            </div>
+                            <div class="flex items-center gap-4 text-slate-700 font-bold">
+                                <i class="fa fa-check-circle text-amber-600"></i>
+                                <span>आपकी राय हमारे लिए महत्वपूर्ण है</span>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="premium-dark p-10 rounded-[2.5rem] shadow-2xl border-b-8 border-amber-500">
+                        <div class="space-y-6">
+                            <input id="fbName" type="text" placeholder="आपका नाम (Optional)"
+                                   class="w-full bg-white/10 border border-white/20 text-white placeholder-white/60 p-5 rounded-2xl outline-none focus:border-amber-500 transition font-bold">
+
+                            <input id="fbMobile" type="tel" placeholder="मोबाइल नंबर (Optional)"
+                                   class="w-full bg-white/10 border border-white/20 text-white placeholder-white/60 p-5 rounded-2xl outline-none focus:border-amber-500 transition font-bold">
+
+                            <select id="fbType"
+                                    class="w-full bg-white/10 border border-white/20 text-white p-5 rounded-2xl outline-none focus:border-amber-500 transition font-bold">
+                                <option value="सुझाव">सुझाव</option>
+                                <option value="समस्या">समस्या</option>
+                                <option value="समर्थन">समर्थन संदेश</option>
+                                <option value="अन्य">अन्य</option>
+                            </select>
+
+                            <textarea id="fbMessage" placeholder="अपना संदेश लिखें..."
+                                      class="w-full bg-white/10 border border-white/20 text-white placeholder-white/60 p-5 rounded-2xl outline-none focus:border-amber-500 transition font-bold h-40"></textarea>
+
+                            <button id="sendFeedbackBtn"
+                                    class="w-full action-btn text-slate-900 py-6 rounded-2xl font-black text-2xl shadow-xl active:scale-95 transition">
+                                <i class="fa fa-paper-plane mr-2"></i> फीडबैक भेजें
+                            </button>
+
+                            <div id="fbStatus"
+                                 class="hidden text-center font-black text-lg bg-white/10 border border-white/15 rounded-2xl p-4">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</section>
+
+<section id="manifesto" class="page container mx-auto px-4 py-20">
+    <div class="max-w-5xl mx-auto glass-panel rounded-[3rem] shadow-2xl overflow-hidden">
+        <div class="premium-dark p-20 text-center text-white">
+            <h2 class="text-6xl font-black mb-4">हमारा संकल्प</h2>
+            <p class="text-amber-500 font-bold tracking-[5px] uppercase">सशक्त रोह - समृद्ध रोह</p>
+        </div>
+        <div class="p-16 space-y-12">
+            <div class="flex items-start gap-10 p-8 hover:bg-slate-50 rounded-3xl transition">
+                <span class="text-7xl font-black text-amber-500/10">01</span>
+                <p class="text-3xl font-bold text-slate-700 leading-tight">पंचायत के सर्वांगीण विकास के लिए पारदर्शिता के साथ काम करना।</p>
+            </div>
+            <div class="flex items-start gap-10 p-8 border-y border-slate-100 hover:bg-slate-50 rounded-3xl transition">
+                <span class="text-7xl font-black text-amber-500/10">02</span>
+                <p class="text-3xl font-bold text-slate-700 leading-tight">शिक्षा, स्वास्थ्य और कृषि सुविधाओं को आधुनिक बनाना।</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="login" class="page container mx-auto px-4 py-20">
+
+    <div id="loginForm" class="max-w-md mx-auto glass-panel p-12 rounded-[3rem] shadow-2xl border-t-8 border-slate-900 text-center">
+        <h2 class="text-4xl font-black mb-10">एडमिन लॉगिन</h2>
+        <div class="space-y-6">
+            <input type="text" id="userInput" placeholder="यूजरनेम" class="w-full bg-slate-50 border-2 p-6 rounded-2xl outline-none focus:border-amber-500 transition font-bold">
+            <input type="password" id="passInput" placeholder="पासवर्ड" class="w-full bg-slate-50 border-2 p-6 rounded-2xl outline-none focus:border-amber-500 transition font-bold">
+            <button onclick="handleLogin()" class="w-full premium-dark text-white py-6 rounded-2xl font-black text-xl shadow-xl">लॉगिन करें</button>
+        </div>
+    </div>
+
+    <div id="adminDashboard" class="hidden max-w-6xl mx-auto glass-panel p-12 rounded-[3.5rem] shadow-2xl border-4 border-amber-500">
+        <div class="flex justify-between items-center mb-16 pb-8 border-b-2">
+            <h2 class="text-4xl font-black text-slate-900">मास्टर कंट्रोल</h2>
+            <button onclick="location.reload()" class="bg-red-500 text-white px-10 py-3 rounded-2xl font-black shadow-lg">लॉगआउट</button>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12">
+            <div class="space-y-8">
+                <div>
+                    <label class="block font-black text-slate-700 mb-3 text-lg">मुख्य संदेश (शायरी):</label>
+                    <textarea id="editShayari" class="w-full bg-slate-50 border-2 p-6 rounded-3xl h-40 outline-none focus:border-amber-500 font-bold"></textarea>
                 </div>
 
-                <div class="bg-amber-50 p-10 rounded-[3rem] border-2 border-amber-100">
-                    <h4 class="font-black text-amber-800 mb-8 text-xl italic"><i class="fa fa-camera mr-3"></i> गैलरी और फोटो कंट्रोल</h4>
-                    <div class="space-y-4">
-                        <label class="block font-bold text-xs uppercase tracking-widest text-amber-600">प्रोफ़ाइल फोटो लिंक:</label>
-                        <input type="text" id="editPhotoUrl" class="w-full p-4 border rounded-xl mb-6">
-                        
-                        <label class="block font-bold text-xs uppercase tracking-widest text-amber-600">गैलरी फोटोज (Direct Links):</label>
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="text" id="g1" placeholder="फोटो 1" class="p-4 border rounded-xl">
-                            <input type="text" id="g2" placeholder="फोटो 2" class="p-4 border rounded-xl">
-                            <input type="text" id="g3" placeholder="फोटो 3" class="p-4 border rounded-xl">
-                            <input type="text" id="g4" placeholder="फोटो 4" class="p-4 border rounded-xl">
-                            <input type="text" id="g5" placeholder="फोटो 5" class="p-4 border rounded-xl">
-                            <input type="text" id="g6" placeholder="फोटो 6" class="p-4 border rounded-xl">
-                        </div>
+                <div>
+                    <label class="block font-black text-slate-700 mb-3 text-lg">आगामी कार्यक्रम:</label>
+                    <input type="text" id="editEvent" class="w-full bg-slate-50 border-2 p-5 rounded-2xl outline-none font-bold">
+                </div>
+
+                <div>
+                    <label class="block font-black text-slate-700 mb-3 text-lg">सोशल लिंक्स (FB/IG/YT):</label>
+                    <div class="space-y-3">
+                        <input type="text" id="fbLink" placeholder="Facebook" class="w-full p-4 border rounded-xl">
+                        <input type="text" id="igLink" placeholder="Instagram" class="w-full p-4 border rounded-xl">
+                        <input type="text" id="ytLink" placeholder="YouTube" class="w-full p-4 border rounded-xl">
                     </div>
                 </div>
             </div>
 
-            <button id="saveBtn" class="w-full action-btn text-slate-900 py-8 rounded-[2.5rem] font-black text-3xl mt-16 shadow-2xl active:scale-95 transition">सबके मोबाइल में अपडेट करें</button>
-        </div>
-    </section>
+            <div class="bg-amber-50 p-10 rounded-[3rem] border-2 border-amber-100">
+                <h4 class="font-black text-amber-800 mb-8 text-xl italic"><i class="fa fa-camera mr-3"></i> गैलरी और फोटो कंट्रोल</h4>
+                <div class="space-y-4">
+                    <label class="block font-bold text-xs uppercase tracking-widest text-amber-600">प्रोफ़ाइल फोटो लिंक:</label>
+                    <input type="text" id="editPhotoUrl" class="w-full p-4 border rounded-xl mb-6">
 
-    <footer class="premium-dark text-white py-24 text-center mt-24 border-t-8 border-amber-500">
-        <div class="container mx-auto px-4">
-            <h4 class="text-4xl font-black mb-6">विपेन्द्र प्रसाद सिन्हा</h4>
-            <p class="text-slate-400 mb-12 max-w-2xl mx-auto text-lg italic">"आपका विश्वास मेरी सबसे बड़ी पूंजी है, रोह पंचायत की सेवा ही मेरा एकमात्र लक्ष्य है।"</p>
-            <div class="flex justify-center gap-12 mb-20">
-                <a id="footerFB" href="#" target="_blank" class="text-5xl hover:text-amber-500 transition"><i class="fab fa-facebook-square"></i></a>
-                <a id="footerIG" href="#" target="_blank" class="text-5xl hover:text-amber-500 transition"><i class="fab fa-instagram"></i></a>
-                <a id="footerYT" href="#" target="_blank" class="text-5xl hover:text-amber-500 transition"><i class="fab fa-youtube"></i></a>
+                    <label class="block font-bold text-xs uppercase tracking-widest text-amber-600">गैलरी फोटोज (Direct Links):</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" id="g1" placeholder="फोटो 1" class="p-4 border rounded-xl">
+                        <input type="text" id="g2" placeholder="फोटो 2" class="p-4 border rounded-xl">
+                        <input type="text" id="g3" placeholder="फोटो 3" class="p-4 border rounded-xl">
+                        <input type="text" id="g4" placeholder="फोटो 4" class="p-4 border rounded-xl">
+                        <input type="text" id="g5" placeholder="फोटो 5" class="p-4 border rounded-xl">
+                        <input type="text" id="g6" placeholder="फोटो 6" class="p-4 border rounded-xl">
+                    </div>
+                </div>
             </div>
-            <div class="text-[10px] text-slate-500 font-bold uppercase tracking-[8px]">Developed by Dhiraj Mehta &copy; 2026</div>
         </div>
-    </footer>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        <!-- ✅ Feedback Viewer (Admin) ADDED -->
+        <div class="mt-16 bg-white p-10 rounded-[3rem] shadow-xl border-l-8 border-amber-500">
+            <h3 class="text-3xl font-black text-slate-900 mb-8 flex items-center gap-4">
+                <i class="fa fa-comments text-amber-600"></i> जनता का फीडबैक
+            </h3>
+            <div id="feedbackList" class="space-y-6">
+                <div class="text-slate-500 font-bold italic">फीडबैक लोड हो रहा है...</div>
+            </div>
+        </div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyC7RoapoxY0nDoSsfa5mUGzEbaKFLmDQ4Y",
-            authDomain: "rohpanchayat.firebaseapp.com",
-            databaseURL: "https://rohpanchayat-default-rtdb.firebaseio.com",
-            projectId: "rohpanchayat",
-            storageBucket: "rohpanchayat.firebasestorage.app",
-            messagingSenderId: "122020322885",
-            appId: "1:122020322885:web:a0f88c60f6bec087d64d2c"
-        };
+        <button id="saveBtn" class="w-full action-btn text-slate-900 py-8 rounded-[2.5rem] font-black text-3xl mt-16 shadow-2xl active:scale-95 transition">
+            सबके मोबाइल में अपडेट करें
+        </button>
+    </div>
+</section>
 
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const contentRef = ref(db, 'content/');
+<footer class="premium-dark text-white py-24 text-center mt-24 border-t-8 border-amber-500">
+    <div class="container mx-auto px-4">
+        <h4 class="text-4xl font-black mb-6">विपेन्द्र प्रसाद सिन्हा</h4>
+        <p class="text-slate-400 mb-12 max-w-2xl mx-auto text-lg italic">"आपका विश्वास मेरी सबसे बड़ी पूंजी है, रोह पंचायत की सेवा ही मेरा एकमात्र लक्ष्य है।"</p>
+        <div class="flex justify-center gap-12 mb-20">
+            <a id="footerFB" href="#" target="_blank" class="text-5xl hover:text-amber-500 transition"><i class="fab fa-facebook-square"></i></a>
+            <a id="footerIG" href="#" target="_blank" class="text-5xl hover:text-amber-500 transition"><i class="fab fa-instagram"></i></a>
+            <a id="footerYT" href="#" target="_blank" class="text-5xl hover:text-amber-500 transition"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div class="text-[10px] text-slate-500 font-bold uppercase tracking-[8px]">Developed by Dhiraj Mehta &copy; 2026</div>
+    </div>
+</footer>
 
-        onValue(contentRef, (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                document.getElementById('mainShayari').innerText = data.shayari || "रोह पंचायत का सम्मान, दिपु मेहता का अभिमान।";
-                document.getElementById('mainEvent').innerText = data.event || "जल्द अपडेट होगा।";
-                
-                if (data.photoUrl) {
-                    const pic = document.getElementById('profilePic');
-                    pic.src = data.photoUrl; pic.classList.remove('hidden');
-                    document.getElementById('defaultIcon').classList.add('hidden');
-                }
-                
-                document.getElementById('footerFB').href = data.fb || "#";
-                document.getElementById('footerIG').href = data.ig || "#";
-                document.getElementById('footerYT').href = data.yt || "#";
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getDatabase, ref, set, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-                const gallery = document.getElementById('photoGallery');
-                gallery.innerHTML = "";
-                const links = [data.g1, data.g2, data.g3, data.g4, data.g5, data.g6];
-                links.forEach(link => { if(link) gallery.innerHTML += `<div class="gallery-card"><img src="${link}"></div>`; });
+    const firebaseConfig = {
+        apiKey: "AIzaSyC7RoapoxY0nDoSsfa5mUGzEbaKFLmDQ4Y",
+        authDomain: "rohpanchayat.firebaseapp.com",
+        databaseURL: "https://rohpanchayat-default-rtdb.firebaseio.com",
+        projectId: "rohpanchayat",
+        storageBucket: "rohpanchayat.firebasestorage.app",
+        messagingSenderId: "122020322885",
+        appId: "1:122020322885:web:a0f88c60f6bec087d64d2c"
+    };
 
-                // Fill inputs
-                document.getElementById('editShayari').value = data.shayari || "";
-                document.getElementById('editEvent').value = data.event || "";
-                document.getElementById('editPhotoUrl').value = data.photoUrl || "";
-                document.getElementById('fbLink').value = data.fb || "";
-                document.getElementById('igLink').value = data.ig || "";
-                document.getElementById('ytLink').value = data.yt || "";
-                document.getElementById('g1').value = data.g1 || "";
-                document.getElementById('g2').value = data.g2 || "";
-                document.getElementById('g3').value = data.g3 || "";
-                document.getElementById('g4').value = data.g4 || "";
-                document.getElementById('g5').value = data.g5 || "";
-                document.getElementById('g6').value = data.g6 || "";
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // ✅ Content
+    const contentRef = ref(db, 'content/');
+
+    // ✅ Feedback
+    const feedbackRef = ref(db, "feedback/");
+
+    onValue(contentRef, (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            document.getElementById('mainShayari').innerText = data.shayari || "रोह पंचायत का सम्मान, दिपु मेहता का अभिमान।";
+            document.getElementById('mainEvent').innerText = data.event || "जल्द अपडेट होगा।";
+
+            if (data.photoUrl) {
+                const pic = document.getElementById('profilePic');
+                pic.src = data.photoUrl; 
+                pic.classList.remove('hidden');
+                document.getElementById('defaultIcon').classList.add('hidden');
+            }
+
+            document.getElementById('footerFB').href = data.fb || "#";
+            document.getElementById('footerIG').href = data.ig || "#";
+            document.getElementById('footerYT').href = data.yt || "#";
+
+            const gallery = document.getElementById('photoGallery');
+            gallery.innerHTML = "";
+            const links = [data.g1, data.g2, data.g3, data.g4, data.g5, data.g6];
+            links.forEach(link => {
+                if (link) gallery.innerHTML += `<div class="gallery-card"><img src="${link}"></div>`;
+            });
+
+            // Fill inputs
+            document.getElementById('editShayari').value = data.shayari || "";
+            document.getElementById('editEvent').value = data.event || "";
+            document.getElementById('editPhotoUrl').value = data.photoUrl || "";
+            document.getElementById('fbLink').value = data.fb || "";
+            document.getElementById('igLink').value = data.ig || "";
+            document.getElementById('ytLink').value = data.yt || "";
+            document.getElementById('g1').value = data.g1 || "";
+            document.getElementById('g2').value = data.g2 || "";
+            document.getElementById('g3').value = data.g3 || "";
+            document.getElementById('g4').value = data.g4 || "";
+            document.getElementById('g5').value = data.g5 || "";
+            document.getElementById('g6').value = data.g6 || "";
+        }
+    });
+
+    // ✅ Save Content (Admin)
+    document.getElementById('saveBtn').onclick = () => {
+        set(ref(db, 'content/'), {
+            shayari: document.getElementById('editShayari').value,
+            event: document.getElementById('editEvent').value,
+            photoUrl: document.getElementById('editPhotoUrl').value,
+            fb: document.getElementById('fbLink').value,
+            ig: document.getElementById('igLink').value,
+            yt: document.getElementById('ytLink').value,
+            g1: document.getElementById('g1').value, g2: document.getElementById('g2').value,
+            g3: document.getElementById('g3').value, g4: document.getElementById('g4').value,
+            g5: document.getElementById('g5').value, g6: document.getElementById('g6').value
+        }).then(() => { 
+            alert("सफल! वेबसाइट लाइव अपडेट हो गई है।"); 
+            showPage('home'); 
+        });
+    };
+
+    // ✅ Feedback Submit (Public)
+    const fbBtn = document.getElementById("sendFeedbackBtn");
+    if (fbBtn) {
+        fbBtn.addEventListener("click", async () => {
+            const name = document.getElementById("fbName").value.trim();
+            const mobile = document.getElementById("fbMobile").value.trim();
+            const type = document.getElementById("fbType").value;
+            const message = document.getElementById("fbMessage").value.trim();
+            const statusBox = document.getElementById("fbStatus");
+
+            if (!message) {
+                statusBox.classList.remove("hidden");
+                statusBox.classList.remove("text-green-300");
+                statusBox.classList.add("text-red-300");
+                statusBox.innerText = "कृपया संदेश लिखें।";
+                return;
+            }
+
+            const payload = {
+                name: name || "Anonymous",
+                mobile: mobile || "",
+                type: type || "सुझाव",
+                message,
+                time: new Date().toLocaleString("hi-IN")
+            };
+
+            try {
+                await push(feedbackRef, payload);
+
+                statusBox.classList.remove("hidden");
+                statusBox.classList.remove("text-red-300");
+                statusBox.classList.add("text-green-300");
+                statusBox.innerText = "धन्यवाद! आपका फीडबैक सफलतापूर्वक भेज दिया गया है।";
+
+                document.getElementById("fbName").value = "";
+                document.getElementById("fbMobile").value = "";
+                document.getElementById("fbMessage").value = "";
+            } catch (err) {
+                statusBox.classList.remove("hidden");
+                statusBox.classList.remove("text-green-300");
+                statusBox.classList.add("text-red-300");
+                statusBox.innerText = "Error: फीडबैक भेजा नहीं जा सका।";
             }
         });
+    }
 
-        document.getElementById('saveBtn').onclick = () => {
-            set(ref(db, 'content/'), {
-                shayari: document.getElementById('editShayari').value,
-                event: document.getElementById('editEvent').value,
-                photoUrl: document.getElementById('editPhotoUrl').value,
-                fb: document.getElementById('fbLink').value,
-                ig: document.getElementById('igLink').value,
-                yt: document.getElementById('ytLink').value,
-                g1: document.getElementById('g1').value, g2: document.getElementById('g2').value,
-                g3: document.getElementById('g3').value, g4: document.getElementById('g4').value,
-                g5: document.getElementById('g5').value, g6: document.getElementById('g6').value
-            }).then(() => { alert("सफल! वेबसाइट लाइव अपडेट हो गई है।"); showPage('home'); });
-        };
-    </script>
+    // ✅ Admin Feedback Read
+    const feedbackListDiv = document.getElementById("feedbackList");
+    if (feedbackListDiv) {
+        onValue(feedbackRef, (snapshot) => {
+            const data = snapshot.val();
+            if (!data) {
+                feedbackListDiv.innerHTML = `<div class="text-slate-500 font-bold italic">अभी तक कोई फीडबैक नहीं आया।</div>`;
+                return;
+            }
 
-    <script>
-        function showPage(id) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            window.scrollTo(0,0);
+            const arr = Object.values(data).reverse();
+
+            feedbackListDiv.innerHTML = arr.map((f) => `
+                <div class="p-8 rounded-[2.5rem] border border-slate-200 bg-slate-50 hover:bg-white transition shadow">
+                    <div class="flex flex-wrap justify-between items-center gap-4 mb-3">
+                        <div class="font-black text-xl text-slate-900">
+                            <i class="fa fa-user text-amber-600 mr-2"></i>${f.name || "Anonymous"}
+                        </div>
+                        <div class="text-xs font-black uppercase tracking-widest text-amber-600">
+                            ${f.type || "सुझाव"}
+                        </div>
+                    </div>
+
+                    <div class="text-slate-700 font-bold text-lg leading-relaxed mb-4">
+                        ${f.message || ""}
+                    </div>
+
+                    <div class="flex flex-wrap justify-between items-center gap-4 text-slate-500 text-sm font-bold">
+                        <div><i class="fa fa-phone text-slate-400 mr-2"></i>${f.mobile || "N/A"}</div>
+                        <div><i class="fa fa-clock text-slate-400 mr-2"></i>${f.time || ""}</div>
+                    </div>
+                </div>
+            `).join("");
+        });
+    }
+</script>
+
+<script>
+    function showPage(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    function handleLogin() {
+        if (document.getElementById('userInput').value === "9508903619" && document.getElementById('passInput').value === "8969276441") {
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('adminDashboard').classList.remove('hidden');
+        } else {
+            alert("पासवर्ड गलत है!");
         }
-        function handleLogin() {
-            if(document.getElementById('userInput').value === "9508903619" && document.getElementById('passInput').value === "8969276441") {
-                document.getElementById('loginForm').classList.add('hidden');
-                document.getElementById('adminDashboard').classList.remove('hidden');
-            } else { alert("पासवर्ड गलत है!"); }
-        }
-        setInterval(() => {
-            document.getElementById('liveClock').innerHTML = `<i class="fa fa-clock mr-2"></i> ${new Date().toLocaleString('hi-IN')}`;
-        }, 1000);
-    </script>
+    }
+
+    setInterval(() => {
+        document.getElementById('liveClock').innerHTML = `<i class="fa fa-clock mr-2"></i> ${new Date().toLocaleString('hi-IN')}`;
+    }, 1000);
+</script>
+
 </body>
 </html>
